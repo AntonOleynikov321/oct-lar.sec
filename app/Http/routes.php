@@ -27,3 +27,6 @@ Route::delete('/tasks/{task}',function(Task $task){
     $task->delete();
     return redirect('/');
 });
+Route::get('/tasks/{task}/edit',function(Task $task,Request $request){
+  
+});

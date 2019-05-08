@@ -14,7 +14,6 @@
                 <!-- Содержимое Navbar -->
             </nav>
         </div>
-
         @yield('content')<!--вставляет содержимое @section('content')-->
     </body>
 </html>
