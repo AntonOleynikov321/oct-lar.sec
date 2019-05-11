@@ -1,10 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="panel-body">  
-    <!-- Отображение ошибок проверки ввода -->
     @include('common.errors')
-    <!-- Форма новой задачи -->
-    <form action="{{ url('tasks/update') }}" method="POST" class="form-horizontal">
+    <form action="{{ url('tasks/'.$task->id) }}" method="POST" class="form-horizontal">
         {{method_field('PUT')}}
         {{ csrf_field() }}
 
@@ -12,7 +10,7 @@
             <label for="task" class="col-sm-3 control-label">Задача</label>
 
             <div class="col-sm-6">
-                <input type="text" name="name" id="task-name" class="form-control" value="">
+                <input type="text" name="name" id="task-name" class="form-control" value="{{$task['name']}}">
             </div>
         </div>
 

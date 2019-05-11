@@ -31,7 +31,8 @@ Route::get("tasks/{task}/edit",function(){
     
     return view('tasks.edit');
 });
-Route::post("tasks/update",function(Request $request, Task $task){
-    
-  echo '123';
+Route::post("tasks/{task}",function(Request $request, Task $task){
+    $task->name = $request->name;
+    $task->save();
+    return redirect('/');
 });
