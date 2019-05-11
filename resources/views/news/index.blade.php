@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="panel-body">
+<!--<div class="panel-body">
  
-    @include('common.errors')
 
 
-    <form action="{{ route('tasks_store') }}" method="POST" class="form-horizontal">
+
+    <form action="{{ route('news_store') }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
 
 
@@ -27,37 +27,27 @@
             </div>
         </div>
     </form>
-</div>
+</div>-->
 
-
-@if (count($tasks) > 0)
+@include('common.errors')
+@if (count($news) > 0)
 <div class="panel panel-default">
     <div class="panel-heading">
-        Текущая задача
+        Новости
     </div>
 
     <div class="panel-body">
         <table class="table table-striped task-table">
-
-           
-            <thead>
-                <tr>
-                    <th>Задача</th>
-                    <th>Действие</th>
-                </tr>
-            </thead>
-
-          
             <tbody>
-                @foreach ($tasks as $task)
+                @foreach ($news as $article)
                 <tr>
                   
                     <td class="table-text">
-                        <div>{{ $task->name }}</div>
+                        <div><a href = "#">{{ $article->title }}</a></div>
                     </td>
 
                     <td>
-                        <form action="{{route('tasks_destroy',$task->id)}}" method="POST">
+                        <form action="{{route('news_destroy',$article->id)}}" method="POST">
                             {{csrf_field()}}
                             {{method_field('delete')}}
          
@@ -67,7 +57,7 @@
                         </form>
                     </td>
                     <td>
-                        <form action="{{route('tasks_edit',$task->id)}}" method="post">
+                        <form action="{{route('news_edit',$article->id)}}" method="post">
                             {{csrf_field()}}
                             {{method_field('get')}}
                             <button type="submit" class="btn btn-default bg-info">
