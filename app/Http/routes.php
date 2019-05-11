@@ -27,11 +27,12 @@ Route::delete('/tasks/{task}',function(Task $task){
     $task->delete();
     return redirect('/');
 });
-Route::get("tasks/{task}/edit",function(){
-    
-    return view('tasks.edit');
+Route::get("/tasks/{task}/edit",function(Task $task){
+    return view('tasks.edit',[
+        'task'=>$task,
+        ]);
 });
-Route::post("tasks/{task}",function(Request $request, Task $task){
+Route::put("tasks/{task}",function(Request $request, Task $task){
     $task->name = $request->name;
     $task->save();
     return redirect('/');
