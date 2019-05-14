@@ -2,7 +2,7 @@
 @section('content')
 <div class="panel-body">   
     @include('common.errors')
-    <form action="{{ route('tasks_show',$task->id) }}" method="POST" class="form-horizontal">
+    <form method="POST" class="form-horizontal">
         {{method_field('get')}}
         {{ csrf_field() }}
 
@@ -10,8 +10,8 @@
             <label for="task" class="col-sm-3 control-label"></label>
 
             <div class="col-sm-6">
-                <input type="text" name="name" id="news-title" class="form-control" value="{{$news->title}}">
-                <input type="text" name="name" id="news-text" class="form-control" value="{{$news->text}}">
+                <input type="text" name="name" id="news-title" class="form-control" value="{{$news->title}}" readonly>
+                <textarea id="news-text" class="form-control" readonly>{{$news->text}}</textarea>
             </div>
         </div>
 

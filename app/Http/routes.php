@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use App\Task;
 use App\News;
 
-Route::get('/',function(){
+Route::get('/', function() {
     return view('index');
 })->name('home');
 
@@ -57,13 +57,15 @@ Route::group(['prefix' => 'tasks'], function() {
     })->name('tasks_update');
 });
 
-Route::group(['prefix'=>'news'],function (){
-   Route::get('/', function () {
+Route::group(['prefix' => 'news'], function () {
+    Route::get('/', function () {
         $news = News::all();
         return view('news.index', [
             'news' => $news,
-        ]); 
+        ]);
     })->name('news_index');
+
+
     Route::post('/', function (Request $request) {
         $validator = Validator::make($request->all(), [
                     'name' => 'required|max:255',
@@ -80,18 +82,22 @@ Route::group(['prefix'=>'news'],function (){
         return redirect(route('news_index'));
     })->name('news_store');
 
+    Route::get('/create', function() {
+        return view('news.article_add');
+    })->name('news_add');
+
     Route::delete('/{news}', function(News $news) {
         $news->delete();
         return redirect(route('news_index'));
     })->name('news_destroy');
 
-    Route::get("/{task}/edit", function(News $news) {
+    Route::get("/{news}/edit", function(News $news) {
         return view('news.edit', [
             'news' => $news,
         ]);
     })->name('news_edit');
 
-    Route::put("/{news}", function(Request $request, Task $task) {
+    Route::put("/{news}", function(Request $request, News $news) {
         $validator = Validator::make($request->all(), [
                     'text' => 'required|max:255',
         ]);
@@ -104,9 +110,11 @@ Route::group(['prefix'=>'news'],function (){
         $news->text = $request->text;
         $news->save();
         return redirect(route('news_index'));
-    })->name('news_update'); 
-    
-     Route::get("/news/{news}", function(News $news) {
-       return view('news.article');
+    })->name('news_update');
+
+    Route::get("/{news}", function(News $news) {
+        return view('news.article', [
+            'news' => $news,
+        ]);
     })->name('news_show');
 });

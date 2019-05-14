@@ -1,40 +1,13 @@
 @extends('layouts.app')
 @section('content')
 
-<!--<div class="panel-body">
- 
-
-
-
-    <form action="{{ route('news_store') }}" method="POST" class="form-horizontal">
-        {{ csrf_field() }}
-
-
-        <div class="form-group">
-            <label for="task" class="col-sm-3 control-label">Задача</label>
-
-            <div class="col-sm-6">
-                <input type="text" name="name" id="task-name" class="form-control">
-            </div>
-        </div>
-
- 
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-6">
-                <button type="submit" class="btn btn-default bg-success">
-                    <i class="fa fa-plus"></i> Добавить задачу
-                </button>
-            </div>
-        </div>
-    </form>
-</div>-->
-
 @include('common.errors')
 @if (count($news) > 0)
 <div class="panel panel-default">
     <div class="panel-heading">
         Новости
     </div>
+    <a href="{{route('news_add')}}">  <i class="fa fa-plus"></i> Добавить новость</a>
 
     <div class="panel-body">
         <table class="table table-striped task-table">
@@ -43,7 +16,7 @@
                 <tr>
                   
                     <td class="table-text">
-                        <div><a href = "#">{{ $article->title }}</a></div>
+                        <div><a href = "{{route('news_show',$article->id)}}">{{ $article->title }}</a></div>
                     </td>
 
                     <td>
@@ -70,6 +43,7 @@
             </tbody>
         </table>
     </div>
+<a href="{{route('news_add')}}">  <i class="fa fa-plus"></i> Добавить новость</a>
 </div>
 @endif
 @endsection
